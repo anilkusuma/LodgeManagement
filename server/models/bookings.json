@@ -1,0 +1,303 @@
+{
+    "name": "Bookings",
+    "options": {
+        "idInjection": false,
+        "mysql": {
+          "schema": "curvecube_lodge_management",
+          "table": "cc_lm_room_bookings"
+        }
+    },
+    "properties": {
+        "bookingId": {
+            "type": "Number",
+            "id": "serial",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "booking_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "roomId": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "room_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "checkInTime": {
+            "type": "String",
+            "required": false,
+            "length": 15,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "check_in_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "checkOutTime": {
+            "type": "String",
+            "required": false,
+            "length": 15,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "check_out_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "amountPaid": {
+            "type": "String",
+            "required": false,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "amount_paid",
+                "dataType": "varchar",
+                "dataLength": 10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "noOfGuests": {
+            "type": "String",
+            "required": false,
+            "length": 3,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "no_of_guests",
+                "dataType": "varchar",
+                "dataLength": 3,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "actualAmountToBePaid": {
+            "type": "String",
+            "required": false,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "actual_amount_to_be_paid",
+                "dataType": "varchar",
+                "dataLength": 10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "perDayCostOfRoom": {
+            "type": "String",
+            "required": true,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "per_day_cost_of_room",
+                "dataType": "varchar",
+                "dataLength": 10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        },
+        "bookingStatus": {
+            "type": "String",
+            "required": false,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "booking_status",
+                "dataType": "varchar",
+                "dataLength": 10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestFeedback": {
+            "type": "String",
+            "required": false,
+            "length": 65535,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_feedback",
+                "dataType": "text",
+                "dataLength": 65535,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "cancelId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "cancel_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "extensionId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "extension_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "checkoutId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "checkout_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "bookingUser": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "booking_user",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "lodgeId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "lodge_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "createdOn": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "created_on",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lastUpdatedTime": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "last_updated_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "guests":{
+            "type":"hasMany",
+            "model":"Guests",
+            "foreignKey":"bookingId"
+        },
+        "rooms":{
+            "type":"belongsTo",
+            "model":"Rooms",
+            "foreignKey":"roomId"
+        },
+        "userDetails":{
+            "type":"belongsTo",
+            "model":"UserDetails",
+            "foreignKey":"bookingUser"
+        },
+        "checkOut":{
+            "type":"belongsTo",
+            "model":"Checkout",
+            "foreignKey":"checkoutId"
+        },
+        "cancel":{
+            "type":"belongsTo",
+            "model":"Cancel",
+            "foreignKey":"cancelId"
+        },
+        "extension":{
+            "type":"belongsTo",
+            "model":"Extension",
+            "foreignKey":"extensionId"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

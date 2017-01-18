@@ -1,0 +1,188 @@
+{
+    "name": "RoomTypes",
+    "options": {
+        "idInjection": false,
+        "mysql": {
+          "schema": "curvecube_lodge_management",
+          "table": "cc_lm_room_types"
+        }
+    },
+    "properties": {
+        "roomTypeId": {
+            "type": "Number",
+            "id": "serial",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "room_type_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "roomTypeName": {
+            "type": "String",
+            "required": false,
+            "length": 200,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "room_type_name",
+                "dataType": "varchar",
+                "dataLength": 200,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "maxNoOfOccupants": {
+            "type": "String",
+            "required": false,
+            "length": 3,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "max_no_of_occupants",
+                "dataType": "varchar",
+                "dataLength": 3,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "acRoom": {
+            "type": "String",
+            "required": false,
+            "length": 1,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "ac_room",
+                "dataType": "varchar",
+                "dataLength": 1,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "costPerDay": {
+            "type": "String",
+            "required": false,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "cost_per_day",
+                "dataType": "varchar",
+                "dataLength":10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "hotWater": {
+            "type": "String",
+            "required": false,
+            "length": 1,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "hot_water",
+                "dataType": "varchar",
+                "dataLength":1,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "tv": {
+            "type": "String",
+            "required": true,
+            "length": 1,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "tv",
+                "dataType": "varchar",
+                "dataLength": 1,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        },
+        "roomTypeDescription": {
+            "type": "String",
+            "required": false,
+            "length": 65535,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "room_type_description",
+                "dataType": "text",
+                "dataLength": 65535,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        }, 
+        "lodgeId": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "lodge_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "createdOn": {
+            "type": "Date",
+            "required": true,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "created_on",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        },
+        "lastUpdatedTime": {
+            "type": "Date",
+            "required": true,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "last_updated_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "rooms":{
+            "type": "hasMany",
+            "model": "Rooms",
+            "foreignKey":"roomTypeId"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

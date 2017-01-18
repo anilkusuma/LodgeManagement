@@ -1,0 +1,158 @@
+{
+    "name": "Checkout",
+    "options": {
+        "idInjection": false,
+        "mysql": {
+          "schema": "curvecube_lodge_management",
+          "table": "cc_lm_checkout_request"
+        }
+    },
+    "properties": {
+        "checkoutId": {
+            "type": "Number",
+            "id": "serial",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "checkout_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "bookingId": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "booking_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "checkOutTime": {
+            "type": "String",
+            "required": false,
+            "length": 15,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "check_out_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "approvalStatus": {
+            "type": "String",
+            "required": false,
+            "length": 20,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "approval_status",
+                "dataType": "varchar",
+                "dataLength": 20,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "approvalAckState": {
+            "type": "String",
+            "required": false,
+            "length": 10,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "approval_ack_state",
+                "dataType": "varchar",
+                "dataLength": 10,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "requestingUser": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "requesting_user",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "lodgeId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "lodge_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "createdOn": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "created_on",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lastUpdatedTime": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "last_updated_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "booking":{
+            "type":"hasOne",
+            "model":"Bookings",
+            "foreignKey":"bookingId"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

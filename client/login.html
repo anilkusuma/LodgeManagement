@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Pagon Technologies</title>
+        <!-- BEGIN META -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Pagon,tracking solutions,top,tracking,gps,fleet managment,ranking,software development,hardware development,software company
+        ">
+        <meta name="description" content="Pagon Lodge Managment Software.">
+        <!-- END META -->
+        
+            <!-- Favicons-->
+        <link rel="icon" href="./favicon.ico" sizes="32x32"/>
+
+        <!-- BEGIN STYLESHEETS -->
+        <link href="./libs/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="./css/homesa.css" />
+        <link type="text/css" rel="stylesheet" href="/libs/fontawesome/css/font-awesome.min.css" />
+        <!-- END STYLESHEETS -->
+        <style>
+            body {
+                background: #fcfcfc;
+            }
+        </style>
+  </head>
+  <body style="justify-content: inherit !important;align-items: inherit !important;">
+    <section class="section-account" ng-app="LodgeLogin" ng-controller="loginForm">
+        <div class="img-backdrop" style="background-image: url('/images/background.jpg')"></div>
+            <div class="spacer"></div>
+            <div class="row loginRow">
+                <div class="col s12 m8 loginCol">
+                    <div class="brandnameDiv">
+                        <span class="brandSpan">PAGON TECHNOLOGIES</span>
+                    </div>
+                    <div class="inputDivs">
+                        <div class="usernameDiv">
+                            <div class="input-field">
+                                <input type="text" id="userName" name="userName" ng-model="userName" ng-focus="inputFocused('username')" ng-keyup="inputChanged($event)">
+                                <label for="userName">Username</label>
+                            </div>
+                            <div class="errorName errorNameUsername">
+                                <div id="username-error"></div>
+                            </div>
+                        </div>
+                        <div class="passwordDiv">
+                            <div class="input-field">
+                                <input type="password" id="password" name="password" ng-model="password" ng-focus="inputFocused('password')" ng-keyup="inputChanged($event)">
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="errorName errorNamePassword">
+                                <div id="password-error"></div>
+                            </div>
+                            <p class="help-block right"><a href="#">Forgotten?</a></p>
+                        </div>
+                        <div class="rememberMeDiv">
+                            <input type="checkbox" class="filled-in"  name="rememberMe" id="rememberMe" type="checkbox" ng-model="rememberMe"/>
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        <div class="loginbutton">
+                           <button class="btn btn-primary btn-raised loginButton" type="button" ng-click="login()">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="/libs/jquery/jquery-3.1.1.min.js"></script>
+        <script src="/libs/js.cookie.js"></script>
+        <script src="/libs/angularjs/angular.min.js"></script>
+        <script src="/libs/angularjs/angular-cookies.min.js"></script>
+        <script src="/libs/momemntjs/moment.js"></script>
+        <script type="application/javascript" src="/libs/materialize/js/materialize.js"></script>
+        <script>
+            var module = angular.module('LodgeLogin',['ngCookies']);
+            module.controller('loginForm',['$scope','$http','$window','$cookies','$timeout',function($scope,$http,$window,$cookies,$timeout){
+                $scope.baseUrl = '';
+                $scope.userName='';
+                $scope.password='';
+                $scope.login = function(){
+                    if(!$scope.userName.replace(/\s/g, '').length){
+                        var html = 'Please enter username';
+                        $('#username-error,#userName ').addClass('error');
+                        $('#username-error').text(html);
+                        $('.errorNameUsername').show();
+                    }else if(!$scope.password.replace(/\s/g, '').length){
+                        var html = 'Please enter password';
+                        $('#password-error,#password').addClass('error');
+                        $('#password-error').text(html);
+                        $('.errorNamePassword').show();
+                    }else{
+                        var rememberMe,expireDate;
+                        if ($scope.rememberMe)
+                        {
+                            rememberMe = 'Y';
+                        }
+                        else {
+                            rememberMe = 'N';
+                        }
+                        
+                        var url=$scope.baseUrl+ '/api/Logins/login?userName='+$scope.userName+'&password='+$scope.password+"&rememberMe="+rememberMe;
+                        $http({
+                          method: 'GET',
+                          url: url
+                        }).then(function successCallback(response) {
+                            var data = response.data;
+                            if(data.loginStatus == "SUCCESS" && data.validatorStatus == "SUCCESS" ){
+                                if(rememberMe == 'Y'){
+                                    expireDate = new Date('2020');
+                                }else{
+                                    expireDate = new Date();
+                                    expireDate.setTime(expireDate.getTime() + (10*60*1000));
+                                }
+                                $cookies.remove("selector");
+                                $cookies.remove("validator");
+                                $cookies.remove("userID");
+                                $cookies.remove("userType");
+                                $cookies.put('selector',data.validator.selector,{expires:expireDate,path:'/'});
+                                $cookies.put('validator',data.validator.validator,{expires:expireDate,path:'/'});
+                                $cookies.put('userID',data.loginId,{expires:expireDate,path:'/'});
+                                $cookies.put('userType',data.userType,{expires:expireDate,path:'/'});
+                                $window.location = '/';
+                            }else if(data.loginStatus == "SUCCESS" && data.validatorStatus == "FAILED"){
+                                $cookies.remove("selector");
+                                $cookies.remove("validator");
+                                $cookies.remove("userID");
+                                $cookies.remove("userType");
+                                $window.location = '/';
+                            }else if(data.loginStatus == "FAILURE"){
+                               $scope.userName = '';
+                               $scope.password = '';
+                               $('#userName').removeClass('dirty');
+                               $('#password').removeClass('dirty');
+                               var html = 'Invalid Username and Password';
+                               $('#username-error,#password-error,#userName,#password').addClass('error');
+                               $('#username-error,#password-error').text(html);
+                               $('.errorName').show();
+                            }
+                        },function errorCallback(response) {
+                            $scope.userName = '';
+                            $scope.password = '';
+                            $('#userName').removeClass('dirty');
+                            $('#password').removeClass('dirty');
+                            var html = 'Invalid Username and Password';
+                            $('#username-error,#password-error,#userName,#password').addClass('error');
+                            $('#username-error,#password-error').text(html);
+                            $('.errorName').show();
+                        });
+                    }
+                };
+                $scope.inputFocused = function(type){
+                    $('.errorName').hide();
+                };
+                $scope.inputChanged = function($event){
+                    var keyCode = $event.keyCode;
+                    if (keyCode == '13') {
+                        $scope.login();
+                    }
+                };
+            }]);
+        </script> 
+    </body>
+</html>
+
+                            

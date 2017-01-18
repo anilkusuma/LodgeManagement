@@ -1,0 +1,17 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "MySqlDB": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "url": "mysql://anilkusuma:anilkusuma@127.0.0.1/curvecube_lodge_management",
+    "database": "curvecube_lodge_management",
+    "password": "anilkusuma",
+    "name": "MySqlDB",
+    "user": "anilkusuma",
+    "connector": "mysql",
+    "dateStrings":true
+  }
+}

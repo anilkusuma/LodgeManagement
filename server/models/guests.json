@@ -1,0 +1,203 @@
+{
+    "name": "Guests",
+    "options": {
+        "idInjection": false,
+        "mysql": {
+          "schema": "curvecube_lodge_management",
+          "table": "cc_lm_guests"
+        }
+    },
+    "properties": {
+        "guestId": {
+            "type": "Number",
+            "id": "serial",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "guest_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "bookingId": {
+            "type": "Number",
+            "required": true,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "booking_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "N"
+            }
+        },
+        "guestName": {
+            "type": "String",
+            "required": false,
+            "length": 200,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_name",
+                "dataType": "varchar",
+                "dataLength": 200,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestPhoneNumber": {
+            "type": "String",
+            "required": false,
+            "length": 11,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_phone_number",
+                "dataType": "varchar",
+                "dataLength": 11,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestEmailId": {
+            "type": "String",
+            "required": false,
+            "length": 100,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_email_id",
+                "dataType": "varchar",
+                "dataLength": 100,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestDateOfBirth": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_date_of_birth",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestIdProofNumber": {
+            "type": "String",
+            "required": false,
+            "length": 50,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_id_proof_number",
+                "dataType": "varchar",
+                "dataLength":50,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestIdProofName": {
+            "type": "String",
+            "required": false,
+            "length": 50,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_id_proof_name",
+                "dataType": "varchar",
+                "dataLength": 50,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "guestAddress": {
+            "type": "String",
+            "required": false,
+            "length": 65535,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "guest_address",
+                "dataType": "text",
+                "dataLength": 65535,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lodgeId": {
+            "type": "Number",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "lodge_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "createdOn": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "created_on",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lastUpdatedTime": {
+            "type": "Date",
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "last_updated_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {
+        "bookings":{
+            "type":"hasMany",
+            "model":"Bookings",
+            "foreignKey":"bookingId"
+        }
+    },
+    "acls": [],
+    "methods": {}
+}

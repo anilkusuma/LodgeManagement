@@ -1,0 +1,164 @@
+.mainCard{
+	padding:20px;
+	cursor: pointer;
+}
+.approvalType,.cardHeadingText{
+	font-size: large;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.approvalDetailsDiv{
+	text-align: center;
+}
+.roomNumberDiv{
+	padding-top: 30px;
+}
+.roomNumber{
+	text-align: center;
+}
+.room{
+	font-size: xx-large;
+    font-weight: 800;
+    font-family: 'PT Serif', serif;
+    color: #ca1400;
+}
+.actionsDiv{
+	display: flex;
+    padding-top: 30px;
+}
+.approve{
+	background-color: #64b164;
+    color: black;
+    font-weight: 600;
+    padding : 0px 10px !important;
+}
+.reject{
+	margin-left: auto;
+    background-color: white;
+    box-shadow: none;
+    color: red;
+    font-weight: 500;
+    padding : 0px 10px !important;
+}
+.reject:hover{
+	background-color: #ff9d9d;
+	color: black;
+}
+.approve:hover{
+	background-color: #00b700;
+	color: white;
+}
+.select-wrapper input.select-dropdown{
+	width: auto !important;
+	float: right;
+}
+#approveModal,#rejectModal{
+	top: 40% !important;
+}
+.modelContent{
+	padding: 20px;
+    width: 100%;
+}
+.confMessage{
+	padding: 20px;
+}
+.message{
+	font-size: medium;
+    font-weight: 500;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+.actionButtons{
+	padding-top: 20px;
+    text-align: right;
+}
+
+
+
+.ribbon-wrapper-green {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+}
+
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#BFDC7A), to(#8EBF45)); 
+  background-image: -webkit-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:    -moz-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:     -ms-linear-gradient(top, #BFDC7A, #8EBF45); 
+  background-image:      -o-linear-gradient(top, #BFDC7A, #8EBF45); 
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid #6e8900;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}​
+@media screen and (min-width: 1600px) {
+	.approvalRow .approvalCol{
+		width: 20%;
+	}
+}
+@media screen and (min-width: 1400px) and (max-width: 1600px)  {
+	.approvalRow .approvalCol{
+		width: 25%;
+	}
+}
+@media screen and (min-width: 1200px) and (max-width: 1400px)  {
+	.approvalRow .approvalCol{
+		width: 33.333%;
+	}
+}
+
+@media screen and (min-width: 995px) and (max-width: 1200px) {
+	.approvalRow .approvalCol{
+		width: 50%;
+	}
+}
+@media screen and (min-width: 800px) and (max-width: 995px) {
+	.approvalRow .approvalCol{
+		width: 33.333%;
+	}
+}
+@media screen and (min-width: 560px) and (max-width: 800px) {
+	.approvalRow .approvalCol{
+		width: 50%;
+	}
+}
+@media screen and (max-width: 560px) {
+	.approvalRow .approvalCol{
+		width: 100%;
+	}
+}

@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Login": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "UserDetails": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Cancel": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Checkout": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Extension": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Lodge": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "RoomTypes": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Rooms": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Validator": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Bookings": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "Guests": {
+    "dataSource": "MySqlDB",
+    "public": true
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  }
+}

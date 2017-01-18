@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html ng-app="Home" ng-controller="HomeMain" >
+<head>
+    <base href="/">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <meta name="keywords" content="Pagon,Pagon lodge management software">
+    <title>Annupamma Lodge</title>
+   
+    <link rel="icon" href="/favicon.ico"/>
+    <link href="/libs/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Material+Icons|Lora|Lobster+Two|Aref+Ruqaa|Merriweather|PT+Serif|Roboto+Mono|Cardo|Courgette|Patua+One" rel="stylesheet">
+    <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">  
+    <link href="/libs/scDateTime/datetime.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/libs/fontawesome/css/font-awesome.css" type="text/css" rel="stylesheet" media="screen">
+    <link href="/libs/scDateTime/sc-date-time.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="/css/homesa.css" type="text/css" rel="stylesheet" media="screen,projection">
+</head>
+<body>
+    <div class="preloader-div valign-wrapper main-preloaderDiv">
+        <div class="preloader-wrapper active">
+            <div class="spinner-layer spinner-green-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header id="header" class="page-topbar" style="display: none;">
+        <div class="navbar-fixed">
+            <nav class="indigo darken-4">
+                <div class="nav-wrapper">                     
+                    <ul class="left">                      
+                      <li><h1 class="logo-wrapper"><a href="/" class="brand-logo darken-1"><img src="./images/logo-title.png" alt="Pagon logo"></a><span class="logo-text">Pagon</span></h1></li>
+                    </ul>
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Search Page"/>
+                    </div>
+                    <ul class="right hide-on-med-and-down">                        
+                        <li><a class="waves-effect waves-block account-icon waves-light"><i class="mdi-action-account-circle"></i></a>
+                        </li>                        
+                        <li><a data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-social-notifications"><span class="count-badge">4</span></i></a>
+                        </li>
+                        <li><a id="logout_button" ng-click="logout()" class="waves-effect waves-block waves-light"><i class="mdi-hardware-keyboard-tab"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main" style="display:none;">
+        <div class="preloader-div valign-wrapper sub-preloaderDiv" style="display: none;">
+            <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-green-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <aside id="left-sidebar-nav" ng-if="adminType">
+                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                    <li class="user-details indigo darken-4">
+                        <div class="row">
+                            <div class="col col s4 m4 l4">
+                                <img src="./images/dudp.jpg" alt="" class="circle responsive-img valign profile-image">
+                            </div>
+                            <div class="col col s8 m8 l8">
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" data-activates="profile-dropdown"><i class="mdi-navigation-arrow-drop-down right"></i>{{::username}}</a>
+                                <ul id="profile-dropdown" class="dropdown-content">
+                                    <li><a href="profile"><i class="mdi-action-account-circle"></i>Profile</a>
+                                    </li>
+                                    <li><a ng-click="logout()"><i class="mdi-hardware-keyboard-tab"></i>Logout</a>
+                                    </li>
+                                </ul>
+                                <p class="user-roal">{{userRoal}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="dashboard" class="nav-li dashboard-li"><i class="mdi-action-dashboard"></i>Dashboard</a>
+                    </li>
+                    <li><a href="bookings" class="nav-li bookings-li"><i class="mdi-maps-hotel"></i>Bookings</a>
+                    </li>
+                    <li><a href="approvals" class="nav-li approvals-li"><i class="mdi-action-highlight-remove"></i>Approvals</a>
+                    </li>
+                    <li class="no-padding">
+                        <ul class="collapsible" data-collapsible="accordian">
+                            <li class="nav-li bold reports-li">
+                                <a id="reprots" class="collapsible-header waves-effect waves-cyan"><i class="mdi-editor-insert-chart"></i>Reports</a>
+                                <div class="collapsible-body" style="display:none">
+                                    <ul>
+                                        <li class="nav-li bookingReports-li"><a id="bookingReports" href="bookingReports" class="waves-effect waves-cyan">Booking Reports</a>
+                                        </li>
+                                        <li class="nav-li cancelReports-li"><a id="cancelReports" href="cancelReports" class="waves-effect waves-cyan" >Canceled Bookings</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="li-hover"><div class="divider"></div></li>
+                    <li class="li-hover"><p class="ultra-small margin more-text">PAGON</p></li>
+                    <li><a href="http://www.pagon.in"><i class="mdi-action-info"></i>About</a>
+                    </li>
+                    <li><a href="help"><i class="mdi-action-help"></i>Help</a>
+                    </li>
+                    <li><a href="reportBug"><i class="mdi-action-bug-report"></i>Report Bug</a>
+                    </li>
+                    <li><a><i class="mdi-file-cloud-download"></i>Download App</a>
+                    </li>
+                </ul>
+                <a data-activates="slide-out" class="sidebar-collapse button-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only indigo darken-4" style="box-shadow: none !important;"><i class="mdi-navigation-menu"></i></a>
+            </aside>
+
+            <div class="container">
+                <div ng-view class="page-content">
+                    
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer" style="display: none;">
+        <div class="footer-copyright indigo darken-4">
+            <div class="container">
+                Copyright 2015 <a class="grey-text text-lighten-4" href="http://www.pagon.co.in" target="_blank">Pagon</a> All rights reserved.
+                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://pagon.co.in/">Pagon</a></span>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script type="text/javascript" src="/libs/jquery/jquery-3.1.1.min.js"></script> 
+    <script type="text/javascript" src="/libs/summernote/summernote.js"></script>
+    <script type="text/javascript" src="/libs/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="/libs/angularjs/angular-animate.js"></script>
+    <script type="text/javascript" src="/libs/angularjs/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="/libs/angularjs/angular-route.min.js"></script>
+    <script type="text/javascript" src="/libs/angularjs/angular-touch.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.3/angular-strap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.2/angular-strap.tpl.min.js"></script>
+    <script type="text/javascript" src="/libs/summernote/angular-summernote.js"></script>
+    <script type="text/javascript" src="/libs/ng-file-upload.js"></script>
+    <script type="text/javascript" src="/libs/scDateTime/sc-date-time.js"></script>
+    <script type="text/javascript" src="/libs/js.cookie.js"></script>
+    <script type="text/javascript" src="/libs/materialize/js/materialize.js"></script>
+    <script type="text/javascript" src="/libs/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/libs/momemntjs/moment.js"></script>
+    <script type="text/javascript" src="/libs/re-tree.min.js"></script>
+    <script type="text/javascript" src="/libs/ng-device-detector.min.js"></script>
+    <script type="text/javascript" src="/libs/fullcalendar/fullcalendar.js"></script>
+    <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/libs/scDateTime/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/userhome.js"></script>
+    <script type="text/javascript" src="/modules/Reception/reception.js"></script>
+    <script type="text/javascript" src="/modules/Approvals/approvals.js"></script>
+    <script type="text/javascript" src="/modules/Bookings/bookings.js"></script>
+</body>
+
+</html>

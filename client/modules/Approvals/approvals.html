@@ -1,0 +1,58 @@
+<link href="./modules/Approvals/approvals.css" type="text/css" rel="stylesheet" media="screen,projection">
+<div id="Approvals">
+    <div class="ApprovalsDiv">
+        <div class="row filterRow">
+            <div class="col s12 filterCol">
+                <select class="approvalType" id="approvalType" ng-model="approval.Filter" ng-options="option as option.type for option in approval.filterOptions track by option.id" ng-change="filterChanged()">
+                </select>
+                <label for="approvalType">Approval Request Type</label>
+            </div>
+        </div>
+        <div class="row approvalRow">
+            <div class="col approvalCol" ng-repeat="pendingApproval in apps track by $index" >
+                <div class="card approvalCard hoverable mainCard">
+                    <div class="ribbon-wrapper-green" ng-show="pendingApproval.requestStatus=='WAITING'">
+                        <div class="ribbon-green">NEW</div>
+                    </div>
+                    <div class="approvalDetails">
+                        <div class="approvalDetailsDiv tooltipped"  data-position="bottom" data-delay="10" data-tooltip="Approval Type">
+                            <span class="approvalType">{{pendingApproval.requestType}} by {{pendingApproval.userDetails.firstName}} {{pendingApproval.userDetails.lastName}}</span>
+                        </div>
+                    </div>
+                    <div class="roomNumberDiv tooltipped"  data-position="bottom" data-delay="100" data-tooltip="Room number">
+                        <div class="roomNumber">
+                            <span class="room">{{pendingApproval.rooms.roomNumber}}</span>
+                        </div>
+                    </div>
+                    <div class="actionsDiv">
+                        <a  class="btn-raised btn waves-effect waves-light approve" ng-click="callApproveRequest(pendingApproval)">Approve</a>
+                        <a  class="btn-raised btn waves-effect waves-light reject" ng-click="callRejectRequest(pendingApproval)">Reject</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="approveModal" class="modal">
+        <div class="modelContent">
+            <div class="confMessage">
+                <span class="message">Please confirm you want to approve ?</span>
+            </div>
+            <div class="actionButtons">
+                <a  class="btn-raised btn waves-effect waves-light confirm" ng-click="confirmApproveClicked()">Confirm</a>
+                <a  class="btn-flat waves-effect waves-light cancel" ng-click="cancelApproveClicked()">Cancel</a>
+            </div>
+        </div>
+    </div>
+    <div id="rejectModal" class="modal">
+        <div class="modelContent">
+            <div class="confMessage">
+                <span class="message">Please confirm you want to reject ?</span>
+            </div>
+            <div class="actionButtons">
+                <a  class="btn-raised btn waves-effect waves-light confirm" ng-click="confirmRejectClicked()">Confirm</a>
+                <a  class="btn-flat waves-effect waves-light cancel" ng-click="cancelRejectClicked()">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+</div>

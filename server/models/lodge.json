@@ -1,0 +1,107 @@
+{
+    "name": "Lodge",
+    "options": {
+        "idInjection": false,
+        "mysql": {
+          "schema": "curvecube_lodge_management",
+          "table": "cc_lm_lodge"
+        }
+    },
+    "properties": {
+        "lodgeId": {
+            "type": "Number",
+            "id": "serial",
+            "required": false,
+            "length": null,
+            "precision": 10,
+            "scale": 0,
+            "mysql": {
+                "columnName": "lodge_id",
+                "dataType": "int",
+                "dataLength": null,
+                "dataPrecision": 10,
+                "dataScale": 0,
+                "nullable": "Y"
+            }
+        },
+        "lodgeAddress": {
+            "type": "String",
+            "required": false,
+            "length": 65535,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "lodge_address",
+                "dataType": "text",
+                "dataLength": 65535,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lodgeName": {
+            "type": "String",
+            "required": false,
+            "length": 200,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "lodge_name",
+                "dataType": "varchar",
+                "dataLength": 200,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "lodgeMobileNumber": {
+            "type": "String",
+            "required": false,
+            "length": 20,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "lodge_mobile_number",
+                "dataType": "varchar",
+                "dataLength": 20,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "Y"
+            }
+        },
+        "createdOn": {
+            "type": "Date",
+            "required": true,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "created_on",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        },
+        "lastUpdatedTime": {
+            "type": "Date",
+            "required": true,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "last_updated_time",
+                "dataType": "timestamp",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "N"
+            }
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+}

@@ -1,0 +1,389 @@
+<link href="./modules/Bookings/bookings.css" type="text/css" rel="stylesheet" media="screen,projection">
+<div id="Bookings">
+    <div class="RoomBookings">
+        <div class="row bookRoomButtonRow">
+            <div class="col s12 bookRoomButtonCol">
+                <a class="waves-effect waves-light btn-raised btn bookRoomButton" ng-click="bookRoom()">New Booking</a>
+            </div>
+        </div>
+        <div class="row currentBookings">
+            <div class="col currentCol" ng-repeat="booking in bookings track by $index">
+                <div class="card bookingCard hoverable">
+                    <div class="roomDetails">
+                        <div class="roomNumberDiv tooltipped"  data-position="bottom" data-delay="10" data-tooltip="Room number">
+                            <span class="roomNumber">{{booking.rooms.roomNumber}}</span>
+                        </div>
+                        <div class="bookingIdDiv tooltipped" data-position="bottom" data-delay="10" data-tooltip="Booking Reference Id">
+                            <span class="bookingId">{{booking.bookingId}}</span>
+                        </div>
+                    </div>
+                    <div class="timeDiv tooltipped"  data-position="bottom" data-delay="100" data-tooltip="{{booking.checkoutMessage}}">
+                        <div class="time">
+                            <div class="hoursDiv timeD">
+                                <span class="hours {{booking.crossedCheckOutTime}}">{{booking.remainingHours}}</span>
+                            </div>
+                            <div class="colonDiv timeD">
+                                <span class="colon {{booking.crossedCheckOutTime}}">:</span>
+                            </div>
+                            <div class="minDiv timeD">
+                                <span class="min {{booking.crossedCheckOutTime}}">{{booking.remainingMins}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actionsDiv">
+                        <a  class="btn-raised btn waves-effect waves-light cancelBooking tooltipped"  data-position="bottom" data-delay="10" data-tooltip="Cancel booking" ng-click="cancelBooking(booking)"><!-- <i class="fa fa-ban"></i> -->Cancel</a>
+                        <a class="btn-raised btn waves-effect waves-light extendBooking tooltipped"  data-position="bottom" data-delay="10" data-tooltip="Extend Booking" ng-click="extendBooking(booking)"><!-- <i class="fa fa-expand"></i> -->Extend</a>
+                        <a  class="btn-raised btn waves-effect waves-light checkoutButton tooltipped"  data-position="bottom" data-delay="10" data-tooltip="Checkout" ng-click="checkOutRoom(booking)"><!-- <i class="fa fa-sign-out"></i> -->Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="bookRoomModal" class="modal" ng-controller="bookingBookCtr">
+        <div class="model-content">
+            <div class="modalHeader row z-depth-1">
+                <div class="col s12">
+                    <div class="HeaderText">
+                        <span class="bookingImage"><i class="mdi-maps-local-hotel bookingi white-text left"></i></span>
+                        <span class="composeText">Book a room</span>
+                        <span class="closeimage"><i class="mdi-content-clear closei white-text" ng-click="cancelBooking()"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row modalContentRow">
+                <div class="col modalContentCol s12">
+                    <div class="row timesRow">
+                        <div class="col checkInCol s12 m6">
+                            <div id="checkInTime"  ng-controller="testCtrl">
+                                <label for="checkIn">Checkin time</label>
+                                <input type='text' id="checkIn" name="checkIn" ng-focus="inputFocused()" ng-model='data.date' placeholder="Checkin Time" date-time-picker-dropdown readonly="readonly" display-mode="date-time" display-format='d/MM/yyyy H:mm'/>
+                                <div class="errorName errorNameRoom">
+                                    <div id="room-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col checkOutCol s12 m6">
+                                <div id="checkInTime"  ng-controller="testCtrl">
+                                <label for="checkIn">Checkout time</label>
+                                <input  type='text' id="checkOut" name="checkOut" ng-focus="inputFocused()" ng-model='data.date' placeholder="Checkout Time" date-time-picker-dropdown readonly="readonly" display-mode="date-time" display-format='d/MM/yyyy H:mm'/>
+                                <div class="errorName errorCheckout">
+                                    <div id="checkout-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row roomRow">
+                        <div class="input-field  col s12 m6 roomTypeCol">
+                            <select class="roomTypeSelect" id="roomTypeSelect" ng-model="newBooking.RoomType" ng-options="roomType as roomType.roomTypeName for roomType in newBooking.roomTypeOptions track by roomType.roomTypeId" ng-change="roomTypeChanged()">
+                            </select>
+                            <label for="roomTypeSelect">Room Type</label>
+                            <div class="errorName errorNameRoomType">
+                                <div id="roomType-error"></div>
+                            </div>
+                        </div>
+                        <div class="input-field  col s12 m6 roomCol">
+                            <select class="roomSelect" id="roomSelect" ng-model="newBooking.Room" ng-options="room as room.roomNumber for room in newBooking.roomOptions track by room.roomId" ng-change="roomChanged()">
+                            </select>
+                            <label for="roomSelect">Room Number</label>
+                            <div class="errorName errorNameRoom">
+                                <div id="room-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row costRow">
+                        <div class="input-field  col s12 m6 costPerDayCol">
+                            <input id="costPerDay" type="number" min="0" ng-focus="inputFocused()" class="validate active" ng-model="newBooking.costPerDay">
+                            <label for="costPerDay" active class="active">Cost per day</label>
+                            <div class="errorName errorNameCost">
+                                <div id="cost-error"></div>
+                            </div>
+                        </div>
+                        <div class="input-field  col s12 m6 roomCol">
+                            <select class="noOfOc" id="noOfOc" ng-model="newBooking.numberOfGuests" ng-options="ocNumber as ocNumber.value for ocNumber in newBooking.roomOccupantsOptions track by ocNumber.value">
+                            </select>
+                            <label for="noOfOc">No of Guests</label>
+                        </div>
+                    </div>
+                    <div class="guestDetailsSpan">
+                        <span class="guestDetais">Guest Details</span>
+                        <span class="guestDetailsNote">Enter atleast one guest details.</span>
+                    </div>
+                    <div class="row guestRow" ng-repeat="guest in newBooking.Guests track by $index">
+                        <div class="col s12 guestCol">
+                            <div class="guestDiv">
+                                <div class="row nameRow">
+                                    <div class="input-field  col s12 m6 nameCol">
+                                        <input id="name" type="text" class="validate active" ng-focus="inputFocused()" ng-model="guest.name">
+                                        <label for="name" active class="active">Guest Name</label>
+                                        <div class="errorName errorname">
+                                            <div id="name-error"></div>
+                                        </div>
+                                    </div>
+                                    <div class="input-field  col s12 m6 guestMobileNumber">
+                                        <input id="guestMobileNumber" type="text" ng-focus="inputFocused()" class="validate active" ng-model="guest.mobile">
+                                        <label for="guestMobileNumber" active class="active">Mobile Number</label>
+                                        <div class="errorName errorNameMobile">
+                                            <div id="mobile-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row emailIdRow">
+                                    <div class="input-field  col s12 m6 emailIdCol">
+                                        <input id="name" type="text" class="validate active" ng-focus="inputFocused()" ng-model="guest.emailId">
+                                        <label for="name" active class="active">Email id</label>
+                                        <div class="errorName errorNameEmail">
+                                            <div id="email-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submitRow row">
+                <div class="col s12 submitCol">
+                    <a class="waves-effect waves-light btn-raised btn submitButton" ng-click="saveBooking()">Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkOutModal" class="modal">
+        <div class="model-content">
+            <div class="modalHeader row z-depth-1">
+                <div class="col s12">
+                    <div class="HeaderText">
+                        <span class="bookingImage"><i class="mdi-maps-local-hotel bookingi white-text left"></i></span>
+                        <span class="composeText">Checkout</span>
+                        <span class="closeimage"><i class="mdi-content-clear closei white-text" ng-click="cancelCheckout()"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row modalContentRow">
+                <div class="col modalContentCol s12">
+                    <div class="row timesRow">
+                        <div class="col checkInCol s12 m6">
+                            <div id="checkInTime" >
+                                <label for="checkIn">Checkin time</label>
+                                <input type='text' id="checkInTimeInput" name="checkIn" ng-model='checkOut.checkInTime' readonly="readonly"  />
+                            </div>
+                        </div>
+                        <div class="col checkOutCol s12 m6">
+                            <div id="checkOutTime"  ng-controller="testCtrl">
+                                <label for="checkIn">Checkout time</label>
+                                <input  type='text' id="checkOutTimeInput" name="checkOut" ng-focus="inputFocused()" ng-model='data.date' placeholder="Checkout Time" date-time-picker-dropdown readonly="readonly" display-mode="date-time" display-format='d/MM/yyyy H:mm' style="cursor: pointer;"/>
+                                <div class="errorName errorCheckout">
+                                    <div id="checkout-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row costRow">
+                        <div class="input-field  col s12 m6 amountToBePaidCol">
+                            <input id="amountToBePaid" type="text"  readonly="readonly" class=" active" active  ng-model="checkOut.amountToBePaid">
+                            <label for="amountToBePaid" active class="active">Amount to be paid</label>
+                        </div>
+                        <div class="input-field  col s12 m6 amountPaidCol">
+                            <input id="amountPaid" type="number" min="0" ng-focus="inputFocused()" class="validate active" ng-model="checkOut.amountPaid">
+                            <label for="amountPaid" active class="active">Amount paid</label>
+                            <div class="errorName errorNameCost">
+                                <div id="cost-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row feedBackRow">
+                        <div class="input-field  col s12 feedbackCol">
+                            <textarea id="feedback" class="materialize-textarea" ng-model="checkOut.guestFeedback"></textarea>
+                            <label for="feedback">Guest Feedback</label>
+                            <div class="errorName errorNameFeedback">
+                                <div id="feedback-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submitRow checkOutRow footerRow row">
+                <div class="col s12 checkOutCol footerCol submitCol">
+                    <a class="waves-effect waves-light btn-raised btn footerButton submitButton" ng-click="completeCheckout()">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="extensionModal" class="modal">
+        <div class="model-content">
+            <div class="modalHeader row z-depth-1">
+                <div class="col s12">
+                    <div class="HeaderText">
+                        <span class="bookingImage"><i class="mdi-maps-local-hotel bookingi white-text left"></i></span>
+                        <span class="composeText">Extend Booking</span>
+                        <span class="closeimage"><i class="mdi-content-clear closei white-text" ng-click="cancelExtend()"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row modalContentRow">
+                <div class="col modalContentCol s12">
+                    <div class="row timesRow">
+                        <div class="col checkInCol s12 m6">
+                            <div id="checkInTime" >
+                                <label for="checkInTimeExtend">Current Checkout Time</label>
+                                <input type='text' id="checkInExtend" name="checkIn" ng-model='extend.currentCheckOutTime' readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="col checkOutCol s12 m6">
+                            <div id="checkOutTime"  ng-controller="testCtrl">
+                                <label for="checkOutTimeExtend">Extend Checkout to</label>
+                                <input  type='text' id="checkOutExtend" name="checkOut" ng-focus="inputFocused()" ng-model='data.date' placeholder="Extend Checkout to" date-time-picker-dropdown readonly="readonly" display-mode="date-time" display-format='d/MM/yyyy H:mm'/>
+                                <div class="errorName errorCheckout">
+                                    <div id="checkout-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row reasonRow">
+                        <div class="input-field  col s12 reasonCol">
+                            <textarea id="feedback" class="materialize-textarea" ng-model="extend.extensionReason"></textarea>
+                            <label for="feedback" class="active">Reason for Extension</label>
+                            <div class="errorName errorNameReason">
+                                <div id="reason-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submitRow extendRow footerRow row">
+                <div class="col s12 extendCol footerCol submitCol">
+                    <a class="waves-effect waves-light btn-raised btn footerButton submitButton" ng-click="completeExtend()">Extend</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="cancelModal" class="modal">
+        <div class="model-content">
+            <div class="modalHeader row z-depth-1">
+                <div class="col s12">
+                    <div class="HeaderText">
+                        <span class="bookingImage"><i class="mdi-maps-local-hotel bookingi white-text left"></i></span>
+                        <span class="composeText">Cancel Booking</span>
+                        <span class="closeimage"><i class="mdi-content-clear closei white-text" ng-click="cancelCancel()"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row modalContentRow">
+                <div class="col modalContentCol s12">
+                    <div class="row timesRow">
+                        <div class="col checkInCol s12 m6">
+                            <div id="checkInTime" >
+                                <label for="checkInCancel">Checkin Time</label>
+                                <input type='text' id="checkInCancel" name="checkInCancel" ng-model='cancel.checkInTime' readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div class="col checkOutCol s12 m6">
+                            <div id="checkOutTime"  ng-controller="testCtrl">
+                                <label for="checkOutCancel">Cancelation Time</label>
+                                <input type='text' id="checkOutCancel" name="checkOutCancel" ng-model='cancel.cancelationTime' readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row reasonRow">
+                        <div class="input-field  col s12 reasonCol">
+                            <textarea id="feedback" class="materialize-textarea" ng-model="cancel.cancelReason"></textarea>
+                            <label for="feedback" class="active">Reason for Cancelation</label>
+                            <div class="errorName errorReason">
+                                <div id="reason-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submitRow extendRow footerRow row">
+                <div class="col s12 extendCol footerCol submitCol">
+                    <a class="waves-effect waves-light btn-raised btn footerButton submitButton" ng-click="completeCancel()">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="viewBookingModal" class="modal">
+        <div class="model-content">
+            <div class="modalHeader row z-depth-1">
+                <div class="col s12">
+                    <div class="HeaderText">
+                        <span class="bookingImage"><i class="mdi-maps-local-hotel bookingi white-text left"></i></span>
+                        <span class="composeText">Booking Id - {{opendedBooking.bookingId}}</span>
+                        <span class="closeimage"><i class="mdi-content-clear closei white-text" ng-click="closeBooking()"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row modalContentRow">
+                <div class="col modalContentCol s12">
+                    <div class="row timesRow">
+                        <div class="col checkInCol s12 m6">
+                            <div id="checkInTime">
+                                <label for="checkIn">Checkin time</label>
+                                <input type='text' id="checkIn" name="checkIn" ng-model='opendedBooking.checkIn'  readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="col checkOutCol s12 m6">
+                                <div id="checkInTime">
+                                <label for="checkIn">Checkout time</label>
+                                <input  type='text' id="checkOut" name="checkOut" ng-model='opendedBooking.checkIn' readonly="readonly"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row roomRow">
+                        <div class="input-field  col s12 m6 roomTypeCol">
+                            <input  type='text' id="checkOut" name="checkOut" ng-model='opendedBooking.checkIn' readonly="readonly"/>
+                            <label for="roomTypeSelect">Room Type</label>
+                        </div>
+                        <div class="input-field  col s12 m6 roomCol">
+                            <input  type='text' id="checkOut" name="checkOut" ng-model='opendedBooking.checkIn' readonly="readonly"/>
+                            <label for="roomSelect">Room Number</label>
+                        </div>
+                    </div>
+                    <div class="row costRow">
+                        <div class="input-field  col s12 m6 costPerDayCol">
+                            <input id="costPerDay" type="number" min="0" class="validate active" ng-model="newBooking.costPerDay" readonly="readonly">
+                            <label for="costPerDay" active class="active">Cost per day</label>
+                        </div>
+                        <div class="input-field  col s12 m6 roomCol">
+                            <input  type='text' id="checkOut" name="checkOut" ng-model='opendedBooking.checkIn' readonly="readonly"/>
+                            <label for="noOfOc">No of Guests</label>
+                        </div>
+                    </div>
+                    <div class="guestDetailsSpan">
+                        <span class="guestDetais">Guest Details</span>
+                    </div>
+                    <div class="row guestRow" ng-repeat="guest in newBooking.Guests track by $index">
+                        <div class="col s12 guestCol">
+                            <div class="guestDiv">
+                                <div class="row nameRow">
+                                    <div class="input-field  col s12 m6 nameCol">
+                                        <input id="name" type="text" class="validate active" readonly="readonly" ng-model="guest.name">
+                                        <label for="name" active class="active">Guest Name</label>
+                                    </div>
+                                    <div class="input-field  col s12 m6 guestMobileNumber">
+                                        <input id="guestMobileNumber" type="text" readonly="readonly" class="validate active" ng-model="guest.mobile">
+                                        <label for="guestMobileNumber" active class="active">Mobile Number</label>
+                                    </div>
+                                </div>
+                                <div class="row emailIdRow">
+                                    <div class="input-field  col s12 m6 emailIdCol">
+                                        <input id="name" type="text" class="validate active" readonly="readonly" ng-model="guest.emailId">
+                                        <label for="name" active class="active">Email id</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

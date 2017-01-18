@@ -1,0 +1,247 @@
+#Bookings .row{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+#Bookings .bookingCard{
+    padding:30px;
+    cursor: pointer;
+}
+#Bookings .roomNumberDiv{
+    text-align: center;
+}
+#Bookings .time{
+    display: flex;
+    justify-content: center;
+}
+.timeD span{
+    font-family: 'Cardo', serif;
+    font-size: 70px;
+    font-weight: 700;
+    color: green;
+}
+.timeD span.crossedCheckOutTime{
+    color: red;
+}
+.timeD span.notCrossedCheckOutTime{
+    color: #459045;
+}
+.roomDetails{
+    display: flex;
+}
+.roomNumber,.bookingId{
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Lora', serif;
+}
+.bookingIdDiv{
+    margin-left: auto;
+}
+.cancelBooking{
+    font-weight: 500;
+    padding: 0px 10px !important;
+    background-color: rgb(158, 134, 13);
+}
+.extendBooking{
+    font-weight: 500;
+    padding: 0px 10px !important;
+    margin: auto;
+    background-color: #00418b;
+}
+.checkoutButton{
+    font-weight: 500;
+    padding: 0px 10px !important;
+    background-color: #00837a;
+}
+.bookRoomButton{
+    background-color: #ff0000;
+    float: right;
+    font-weight: 600;
+    color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.actionsDiv{
+    display: flex;
+    padding: 30px 0px 0px 0px;
+}
+#Bookings .bookingi {
+    font-size: 25px;
+}
+#Bookings .dropdown-content{
+    max-height: 300px !important;
+    overflow: overlay;
+}
+.modalContentRow{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: overlay;
+    padding: 20px 15px 0px 15px !important;
+
+}
+#Bookings .caret{
+    display: none;
+}
+#Bookings .time-date > .control > .slider > .time-control > .time-inputs > .hours.down, 
+#Bookings .time-date > .control > .slider > .time-control > .time-inputs > .minutes.down {
+    bottom: -5rem;
+}
+#Bookings .time-date > .control > .slider > .time-control > .time-inputs > .hours.up, 
+#Bookings .time-date > .control > .slider > .time-control > .time-inputs > .minutes.up {
+    top: -5rem;
+}
+#Bookings  .time-date > .control > .slider > .time-control > .time-inputs > .hours.minutes,
+#Bookings  .time-date > .control > .slider > .time-control > .time-inputs > .minutes.minutes {
+    right: 0.6rem;
+}
+#Bookings  .time-date > .control > .slider > .time-control > .time-inputs > .hours.hours, 
+#Bookings  .time-date > .control > .slider > .time-control > .time-inputs > .minutes.hours {
+    left: -0.9rem;
+    right: 50%;
+    margin-right: 1rem;
+}
+.guestDetailsSpan{
+    padding: 15px 0px;
+}
+.guestDetailsNote{
+    font-size: smaller;
+    color: grey;
+    display: block;
+    font-family: 'PT Serif', serif;
+}
+.guestDetails{
+    font-size: smaller;
+    color: grey;
+    display: block;
+    font-family: 'PT Serif', serif;
+}
+.guestRow{
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding-top: 15px;
+}
+.modalContentRow .modalContentCol{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    
+}
+.composeText {
+    color: white;
+    font-size: x-large;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+}
+.HeaderText {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+}
+.modalHeader {
+    background-color: #3b86ff;
+    margin-bottom: 0px !important;
+}
+.model-content{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+}
+.submitButton {
+    background-color:#4285f4;
+    margin-left: auto;
+}
+
+.submitButton:hover{
+    background-color: #23cab9;
+}
+#checkIn,#checkOut{
+    background-color: transparent !important;
+    cursor: pointer !important;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: medium;
+    font-family: 'Cardo', serif;
+}
+#checkInTime label, #checkOutTime label{
+    position: relative;
+}
+
+.modal{
+    width: 80%;
+    height: 80%;
+    max-height: auto;
+    display: none;
+    flex-direction: column;
+    flex: 1 1 auto;
+    background-color: white;
+}
+
+
+
+.submitRow {
+    padding: 15px 15px !important;
+    margin-bottom: 10px !important ;
+    
+}
+
+
+
+
+
+.closei{
+    font-size: 25px;
+    cursor: pointer;
+    margin-left: 0px;
+    
+}
+.closei:hover{
+    color: #ff6262 !important;
+}
+
+.closeimage {
+    margin-left: auto;
+}
+
+
+
+@media only screen and (max-width: 600px){ 
+    .modal .model-content{
+        display: flex;
+    }
+    .modal{
+        max-height: 100% ;
+        height: 100%;
+        width: 100%;
+        top: 0% !important;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .row.currentBookings .currentCol{
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 1350px) and (max-width: 1600px)  {
+    .row.currentBookings .currentCol{
+        width: 33.333%;
+    }
+}
+
+@media screen and (min-width: 995px) and (max-width: 1350px) {
+    .row.currentBookings .currentCol{
+        width: 50%;
+    }
+}
+@media screen and (min-width: 695px) and (max-width: 995px) {
+    .row.currentBookings .currentCol{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 695px) {
+    .row.currentBookings .currentCol{
+        width: 100%;
+    }
+}
